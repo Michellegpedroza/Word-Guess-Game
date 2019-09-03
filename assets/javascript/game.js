@@ -12,16 +12,23 @@ const guessedLetters = []
 
 let word = getRandWord()
 
-const displayWord = function () {
+const displayWord = function (letterPicked) {
   let wordStr = ` `
   word.split(` `).forEach(function (letter) {
-    wordStr += `_ `
+    if (letter === letterPicked || guessedLetters.indexOf(letter) !== -1) {
+      wordStr += `${letterPicked} ` 
+    } else {
+      wordStr += `_ `
+    }
   })
   document.getElementById(`word`).textContent = wordStr
 }
 
 document.onkeyup = function (event) {
     if (event.keyCode >= 65 && event.keyCode <= 90){
-
+      if (word.includes(event.key)) {
+        guessedLetters.push(event.key)
+        displayWord(event.key)
+      }
     }
 }
