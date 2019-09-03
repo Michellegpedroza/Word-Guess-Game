@@ -6,29 +6,29 @@ const getRandWord = function () {
 }
 
 let wins = 0
-let loses = 0
+let losses = 0
 let guesses = 5
-const guessedLetters = []
-
+const lettersGuessed = []
 let word = getRandWord()
 
-const displayWord = function (letterPicked) {
-  let wordStr = ` `
+const displayWord = function (chosen) {
+  let wordstr = ` `
   word.split(` `).forEach(function (letter) {
-    if (letter === letterPicked || guessedLetters.indexOf(letter) !== -1) {
-      wordStr += `${letterPicked} ` 
+    if (lettersGuessed.indexOf(letter) !== -1) {
+      wordstr += `${letter} `
     } else {
-      wordStr += `_ `
+      wordstr += `_ `
     }
   })
-  document.getElementById(`word`).textContent = wordStr
+  document.getElementById(`word`).textContent = wordstr
 }
 
 document.onkeyup = function (event) {
-    if (event.keyCode >= 65 && event.keyCode <= 90){
-      if (word.includes(event.key)) {
-        guessedLetters.push(event.key)
-        displayWord(event.key)
-      }
+  if (event.keyCode >= 65 && event.keyCode <= 90) {
+    if (word.includes(event.key)) {
+      lettersGuessed.push(event.key)
+      document.getElementById(`letters`).textContent = lettersGuessed.join(`, `)
+      displayWord()
     }
+  }
 }
