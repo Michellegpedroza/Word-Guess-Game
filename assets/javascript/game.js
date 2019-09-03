@@ -25,10 +25,14 @@ const displayWord = function (chosen) {
 
 document.onkeyup = function (event) {
   if (event.keyCode >= 65 && event.keyCode <= 90) {
-    if (word.includes(event.key)) {
+    if (lettersGuessed.indexOf(event.key) === -1) {
       lettersGuessed.push(event.key)
       document.getElementById(`letters`).textContent = lettersGuessed.join(`, `)
-      displayWord()
+      if (word.includes(event.key)) {
+        displayWord()
+      } else{
+        guesses --
+      }
     }
   }
 }
