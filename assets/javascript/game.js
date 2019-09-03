@@ -27,7 +27,7 @@ const reset = function () {
 
 //Displays the word with _ 
 const displayWord = function () {
-  let wordstr = `` 
+  let wordstr = ``
 
   // Tracks if the user has guess right
   let winStatus = true
@@ -44,7 +44,7 @@ const displayWord = function () {
   })
   document.getElementById(`word`).textContent = wordstr
 
-//If word guess Right - Win alert and game Resets
+  //If word guessed Right - Win alert and game Resets
   if (winStatus) {
     alert(`You Won! The word was ${word}!`)
     wins++
@@ -52,9 +52,11 @@ const displayWord = function () {
   }
 }
 
-//
+//Checks if letter guesses is in the word
 document.onkeyup = function (event) {
+  //Insures only letters are passing through
   if (event.keyCode >= 65 && event.keyCode <= 90) {
+    //Creates array of the letters guessed
     if (lettersGuessed.indexOf(event.key) === -1) {
       lettersGuessed.push(event.key)
       document.getElementById(`letters`).textContent = lettersGuessed.join(`, `)
@@ -63,6 +65,7 @@ document.onkeyup = function (event) {
       } else {
         guesses--
         document.getElementById(`guessesLeft`).textContent = guesses
+        //If  guessed wrong - Lost alert and game resets
         if (guesses <= 0) {
           alert(`You Lost! The word wasy ${word}`)
           losses++
